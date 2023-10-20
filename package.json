@@ -4,6 +4,10 @@
     "description": "An SDK for accessing 1688's shitty API",
     "main": "main.ts",
     "types": "types.d.ts",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/KevinKWZheng/1688-API.git"
+    },
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "lint": "npx eslint src/** ./main.ts --fix"
