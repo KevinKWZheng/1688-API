@@ -65,19 +65,19 @@ declare module "1688-api" {
          * @link https://open.1688.com/api/apidocdetail.htm?id=com.alibaba.fenxiao:alibaba.pifatuan.product.detail.list-1
          * @param params 
          */
-        public getBatchProductDetail(params: { offerIds: number[] }): Promise<APIResponse>;
+        public getBatchProductDetail(offerIds: number[]): Promise<APIResponse>;
 
         /**
          * @link https://open.1688.com/api/apidocdetail.htm?id=com.alibaba.fenxiao:alibaba.fenxiao.chosen.offerlist.get-1
          * @param params 
          */
-        public getChosenStockpileList(params: { uniqueKey: string }): Promise<APIResponse>;
+        public getChosenStockpileList(uniqueKey: string): Promise<APIResponse>;
 
         /**
          * @link https://open.1688.com/api/apidocdetail.htm?id=com.alibaba.fenxiao:alibaba.fenxiao.chosen.offerlist.removeall-1
          * @param params 
          */
-        public clearChosenStockpileList(params: { uniqueKey: string }): Promise<APIResponse>;
+        public clearChosenStockpileList(uniqueKey: string): Promise<APIResponse>;
 
         /**
          * @link https://open.1688.com/api/apidocdetail.htm?id=com.alibaba.fenxiao:dkey.get-1
