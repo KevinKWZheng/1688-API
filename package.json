@@ -1,6 +1,6 @@
 {
     "name": "1688-api",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "description": "An SDK for accessing 1688's shitty API",
     "main": "main.ts",
     "types": "types.d.ts",
