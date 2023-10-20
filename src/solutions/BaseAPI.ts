@@ -59,8 +59,10 @@ export class API1688 {
                 }
             }
         }
-        const signature = sign(urlPath, param, this.secretKey);
-        param._aop_signature = signature;
+        if (!param._aop_signature) {
+            const signature = sign(urlPath, param, this.secretKey);
+            param._aop_signature = signature;
+        }
         const URL = parseUrl(url, param);
         const contentType = (!containsFile) ? `application/x-www-form-urlencoded; charset=UTF-8` : `multipart/form-data`;
 

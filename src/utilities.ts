@@ -42,7 +42,7 @@ export function encodeProperties(params: object) {
 }
 
 export async function sendRequest(url: string, param: RequestParams, appInfo: AppInfo,
-    method: `POST` | `GET` = `POST`, requiresAuth: boolean = true, containsFile: boolean = false) {
+    method: `POST` | `GET` = `POST`, requiresAuth: boolean = true, accessToken?: string, containsFile: boolean = false) {
     if (url.indexOf(`openapi`) == url.length - `openapi`.length) throw new Error(`Incorrect URL`);
     let urlPath = url.substring(url.indexOf(`openapi`) + `openapi`.length + 1);
 
@@ -62,7 +62,7 @@ export async function sendRequest(url: string, param: RequestParams, appInfo: Ap
         }
     }
 
-    if (!param.access_token && requiresAuth) param.access_token = this.access_token;
+    if (!param.access_token && requiresAuth) param.access_token = accessToken;
     for (const i in param) {
         if (i && !param[i]) {
             delete param[i];
@@ -76,8 +76,11 @@ export async function sendRequest(url: string, param: RequestParams, appInfo: Ap
             }
         }
     }
-    const signature = sign(urlPath, param, appInfo.secretKey);
-    param._aop_signature = signature;
+    if (!param._aop_signature) {
+        const signature = sign(urlPath, param, appInfo.secretKey);
+        param._aop_signature = signature;
+    }
+
     const URL = parseUrl(url, param);
     const contentType = (!containsFile) ? `application/x-www-form-urlencoded; charset=UTF-8` : `multipart/form-data`;
 
