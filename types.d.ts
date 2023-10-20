@@ -196,7 +196,7 @@ declare module "1688-api" {
      * @param containsFile 
      */
     export function sendRequest(url: string, param: RequestParams, appInfo: AppInfo,
-        method: `POST` | `GET`, requiresAuth: boolean, containsFile: boolean): Promise<BaseApiResponse>;
+        method: `POST` | `GET`, requiresAuth: boolean, containsFile: boolean, accessToken?: string): Promise<BaseApiResponse>;
 }
 
 type AppInfo = {

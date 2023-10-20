@@ -42,7 +42,7 @@ export function encodeProperties(params: object) {
 }
 
 export async function sendRequest(url: string, param: RequestParams, appInfo: AppInfo,
-    method: `POST` | `GET` = `POST`, requiresAuth: boolean = true, accessToken?: string, containsFile: boolean = false) {
+    method: `POST` | `GET` = `POST`, requiresAuth: boolean = true, containsFile: boolean = false, accessToken?: string) {
     if (url.indexOf(`openapi`) == url.length - `openapi`.length) throw new Error(`Incorrect URL`);
     let urlPath = url.substring(url.indexOf(`openapi`) + `openapi`.length + 1);
 

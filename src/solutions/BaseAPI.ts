@@ -24,7 +24,7 @@ export class API1688 {
         return this.access_token;
     }
 
-    protected async sendRequest(url: string, param: RequestParams,
+    public async sendRequest(url: string, param: RequestParams,
         method: `POST` | `GET` = `POST`, requiresAuth: boolean = true, containsFile: boolean = false) {
         if (url.indexOf(`openapi`) == url.length - `openapi`.length) throw new Error(`Incorrect URL`);
         let urlPath = url.substring(url.indexOf(`openapi`) + `openapi`.length + 1);
