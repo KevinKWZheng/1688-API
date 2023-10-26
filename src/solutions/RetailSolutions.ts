@@ -1,6 +1,6 @@
-import { API1688 } from "./BaseAPI";
+import { BaseAPI } from "./BaseAPI";
 
-export class RetailSourcingSolution extends API1688 {
+export class RetailSourcingSolution extends BaseAPI {
 
     protected readonly genDKeyEndpoint = `param2/1/com.alibaba.fenxiao/dkey.get/`;
     protected readonly getCategoryEndpoint = `param2/1/com.alibaba.product/alibaba.category.get/`;

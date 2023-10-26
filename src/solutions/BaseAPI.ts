@@ -1,7 +1,7 @@
 import fetch from "node-fetch";
 import { parseUrl, sign } from "../utilities";
 
-export class API1688 {
+export class BaseAPI {
     protected readonly appKey: number;
     protected readonly secretKey: string;
     protected readonly access_token: string;
@@ -80,5 +80,29 @@ export class API1688 {
             statusText: `${response.status} ${response.statusText}`,
             body: (await response.json())
         } as BaseApiResponse;
+    }
+
+    public async distributiveImageSearch(params: ImageSearchParam) {
+        const response = await this.sendRequest(`https://${this.BaseUrl}/param2/1/com.alibaba.linkplus/alibaba.cps.similar.offer.search/`,
+            params, `GET`);
+        if (!response.status)
+            return {
+                statusText: response.statusText,
+                body: response.body,
+            } as APIErrorMsg;
+        else
+            return response.body;
+    }
+
+    public async overseasImageSearch(params: ImageSearchParam) {
+        const response = await this.sendRequest(`https://${this.BaseUrl}/param2/1/com.alibaba.linkplus/alibaba.cross.similar.offer.search`,
+            params, `GET`);
+        if (!response.status)
+            return {
+                statusText: response.statusText,
+                body: response.body,
+            } as APIErrorMsg;
+        else
+            return response.body;
     }
 }

@@ -1,6 +1,6 @@
 // eslint-disable-next-line quotes
 declare module "1688-api" {
-    export class API1688 {
+    export class BaseAPI {
         constructor(appKey: number, secretKey: string, access_token: string);
 
         /**
@@ -17,14 +17,14 @@ declare module "1688-api" {
          * @param method 
          * @param containsFile 
          */
-        public sendRequest(url: string, param: RequestParams, method: `POST` | `GET`, containsFile: boolean): BaseApiResponse
+        public sendRequest(url: string, param: RequestParams, method: `POST` | `GET`, containsFile: boolean): Promise<BaseApiResponse>
     }
 
     /**
      * Documentations (only Chinese): 
      * @link https://open.1688.com/solution/solutionDetail.htm?spm=a260s.11247765.je8hk6gy.17.66cf32ba9bXrso&solutionKey=1662715146260#apiAndMessageList
      */
-    export class RetailSourcingSolution extends API1688 {
+    export class RetailSourcingSolution extends BaseAPI {
         constructor(appKey: number, secretKey: string, access_token: string);
 
         /**
@@ -248,4 +248,17 @@ interface AddressParam {
     provinceText: string;
     adress: string;
     districtCode: string;
+}
+
+interface ImageSearchParam extends RequestParams {
+    picUrl: string,
+    page: number,
+    priceMin?: string,
+    priceMax?: string,
+    sortFields?: string,
+    cpsFirst?: boolean,
+    mediaId?: number,
+    mediaZoneId?: number,
+    categoryID?: string,
+    classify?: string
 }
