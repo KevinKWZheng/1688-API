@@ -18,6 +18,38 @@ declare module "1688-api" {
          * @param containsFile 
          */
         public sendRequest(url: string, param: RequestParams, method: `POST` | `GET`, containsFile: boolean): Promise<BaseApiResponse>
+
+        /**
+         * @link https://open.1688.com/api/apidocdetail.htm?id=com.alibaba.linkplus:alibaba.cps.similar.offer.search-1
+         * @param params 
+         */
+        public distributiveImageSearch(params: ImageSearchParam): Promise<{
+            success: boolean,
+            code: string,
+            message: string,
+            result: {
+                total: number,
+                page: number,
+                pageSize: number,
+                result: ProductSearchResult
+            }
+        }>
+
+        /**
+         * @link https://open.1688.com/api/apidocdetail.htm?id=com.alibaba.linkplus:alibaba.cross.similar.offer.search-1
+         * @param params 
+         */
+        public overseasImageSearch(params: ImageSearchParam): Promise<{
+            success: boolean,
+            code: string,
+            message: string,
+            result: {
+                total: number,
+                page: number,
+                pageSize: number,
+                result: ProductSearchResult
+            }
+        }>
     }
 
     /**
@@ -261,4 +293,33 @@ interface ImageSearchParam extends RequestParams {
     mediaZoneId?: number,
     categoryID?: string,
     classify?: string
+}
+
+interface ProductSearchResult {
+    total: number,
+    page: number,
+    pageSize: number,
+    result: {
+        offerId: string,
+        subject: string,
+        quantityBegin: number,
+        unit: string,
+        oldPrice: number,
+        price: number,
+        imageUrl: string,
+        videoUrl: string,
+        deliveryFree: boolean,
+        detailUrl: string,
+        best: boolean,
+        shili: boolean,
+        saleAmount: number,
+        wantBuy: number,
+        services: string[],
+        countryEn: string,
+        countryCn: string,
+        province: string,
+        city: string,
+        supplyAmount: number,
+        categoryId: string
+    }[]
 }

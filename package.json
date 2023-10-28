@@ -1,7 +1,7 @@
 {
     "name": "1688-api",
-    "version": "1.1.0",
-    "description": "An SDK for accessing 1688's shitty API",
+    "version": "1.1.1",
+    "description": "An SDK for accessing 1688's API",
     "main": "main.ts",
     "types": "types.d.ts",
     "repository": {
