@@ -99,3 +99,13 @@ export async function sendRequest(url: string, param: RequestParams, appInfo: Ap
         body: (await response.json())
     } as BaseApiResponse;
 }
+
+export async function getToken(appKey: number, redirectUrl: string) {
+    const authResponse = await fetch(`https://auth.1688.com/oauth/authorize?client_id=${appKey}&site=1688&redirect_uri=${redirectUrl}`,
+        { method: `GET`, });
+    if (!authResponse.ok) {
+        return { status: false };
+    }
+    
+
+}

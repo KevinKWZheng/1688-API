@@ -323,3 +323,14 @@ interface ProductSearchResult {
         categoryId: string
     }[]
 }
+
+interface AuthResult {
+    status: boolean,
+    alid?: string,
+    access_token?: string,
+    refresh_token?: string,
+    resource_owner?: string,
+    memberId?: string,
+    expires_in?: string,
+    refresh_token_timeout?: string,
+}

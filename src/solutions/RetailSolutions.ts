@@ -75,14 +75,15 @@ export class RetailSourcingSolution extends BaseAPI {
     }
 
     public async getBatchProductDetail(offerIds: number[]) {
-        const response = await this.sendRequest(`http://${this.BaseUrl}/${this.batchProductDetailEndpoint}`, { offerIds: offerIds }, `GET`);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const response = await this.sendRequest(`http://${this.BaseUrl}/${this.batchProductDetailEndpoint}`, { offerIds: offerIds }, `GET`) as any;
         if (!response.status)
             return {
                 statusText: response.statusText,
                 body: response.body,
             } as APIErrorMsg;
         else
-            return response.body;
+            return response.body.result as APIResponse;
     }
 
     public async getChosenStockpileList(uniqueKey: string) {
