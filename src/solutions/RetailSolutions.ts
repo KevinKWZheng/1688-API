@@ -17,7 +17,7 @@ export class RetailSourcingSolution extends BaseAPI {
     protected readonly batchProductDetailEndpointV1 = `param2/1/com.alibaba.fenxiao/alibaba.pifatuan.product.detail.list/`;
     protected readonly batchProductDetailEndpointV2 = `param2/2/com.alibaba.fenxiao/alibaba.pifatuan.product.detail.list/`;
     protected readonly getChosenStockpileListEndpoint = `param2/1/com.alibaba.fenxiao/alibaba.fenxiao.chosen.offerlist.get/`;
-    protected readonly clearChoseStockpileListEndpoint = `param2/1/com.alibaba.fenxiao:alibaba.fenxiao.chosen.offerlist.removeall`;
+    protected readonly clearChoseStockpileListEndpoint = `param2/1/com.alibaba.fenxiao:alibaba.fenxiao.chosen.offerlist.removeall/`;
 
     constructor(appKey: number, secretKey: string, access_token: string) {
         super(appKey, secretKey, access_token);

@@ -329,3 +329,47 @@ interface AuthResult {
     expires_in?: string,
     refresh_token_timeout?: string,
 }
+
+declare namespace DropshippingSolutionTypes {
+
+}
+interface ProductAttribute {
+    attributeID: number;
+    attributeName: string;
+    valueID: number;
+    value: string;
+    isCustom: boolean;
+}
+interface ProductInfo {
+    productID: number;
+    productType: `wholesale` | `sourcing`;
+    categoryID: number;
+    categoryName: string;
+    productAttribute: ProductAttribute[];
+    groupID: number[];
+    status: string;
+    subject: string;
+    description: string;
+    language: string;
+    periodOfValidity: number;
+    bizType: number;
+    pictureAuth: boolean;
+    supplierUserId: string;
+    qualityLevel: number;
+    supplierLoginId: string;
+    //mainVideo:string;
+    productCargoNumber: string;
+    crossBorderOffer: boolean;
+    referencePrice: string;
+    createTime: string;
+    lastUpdateTime: string;
+    expireTime: string;
+    modifyTime: string;
+    approvedTime: string;
+    lastRepostTime: string;
+    bookedCount: string;
+    productLine: string;
+    //detailVideo:string;
+    sellerLoginId: string;
+    sellerId: number;
+}
