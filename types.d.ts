@@ -27,12 +27,7 @@ declare module "1688-api" {
             success: boolean,
             code: string,
             message: string,
-            result: {
-                total: number,
-                page: number,
-                pageSize: number,
-                result: ProductSearchResult
-            }
+            result: ProductSearchResult
         }>
 
         /**
