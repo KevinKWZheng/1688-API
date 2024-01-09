@@ -10,11 +10,12 @@ export class RetailSourcingSolution extends BaseAPI {
     protected readonly productListEndpoint = `param2/1/com.alibaba.fenxiao/alibaba.pifatuan.product.list/`;
     protected readonly getAddressCodeEndpoint = `param2/1/com.alibaba.trade/alibaba.trade.addresscode.get/`;
     protected readonly getProductPageListEndpoint = `param2/1/com.alibaba.fenxiao/jxhy.product.getPageList/`;
-    protected readonly matchProductEndpoint = `param2/1/com.alibaba.fenxiao:alibaba.pifatuan.product.match.get/`;
+    protected readonly matchProductEndpoint = `param2/1/com.alibaba.fenxiao/alibaba.pifatuan.product.match.get/`;
     protected readonly searchCategoryEndpoint = `param2/1/com.alibaba.product/alibaba.category.searchByKeyword/`;
     protected readonly unfollowProductEndpoint = `param2/1/com.alibaba.product/alibaba.product.unfollow.crossborder/`;
     protected readonly productRulesEndpoint = `param2/1/com.alibaba.fenxiao/alibaba.pifatuan.product.search.tag.list/`;
-    protected readonly batchProductDetailEndpoint = `param2/2/com.alibaba.fenxiao/alibaba.pifatuan.product.detail.list/`;
+    protected readonly batchProductDetailEndpointV1 = `param2/1/com.alibaba.fenxiao/alibaba.pifatuan.product.detail.list/`;
+    protected readonly batchProductDetailEndpointV2 = `param2/2/com.alibaba.fenxiao/alibaba.pifatuan.product.detail.list/`;
     protected readonly getChosenStockpileListEndpoint = `param2/1/com.alibaba.fenxiao/alibaba.fenxiao.chosen.offerlist.get/`;
     protected readonly clearChoseStockpileListEndpoint = `param2/1/com.alibaba.fenxiao:alibaba.fenxiao.chosen.offerlist.removeall`;
 
@@ -74,9 +75,16 @@ export class RetailSourcingSolution extends BaseAPI {
             return response.body;
     }
 
-    public async getBatchProductDetail(offerIds: number[]) {
+    public async getBatchProductDetail(offerIds: number[], version?: 1 | 2) {
+        let endpoint = ``;
+        if (version && (version == 1 || version == 2)) {
+            endpoint = (version == 1) ? this.batchProductDetailEndpointV1 : this.batchProductDetailEndpointV2;
+        } else {
+            if (!version) endpoint = this.batchProductDetailEndpointV2;
+            else throw new Error(`Invalid param value: ${version}`);
+        }
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const response = await this.sendRequest(`http://${this.BaseUrl}/${this.batchProductDetailEndpoint}`, { offerIds: offerIds }, `GET`) as any;
+        const response = await this.sendRequest(`http://${this.BaseUrl}/${endpoint}`, { offerIds: offerIds }, `GET`) as any;
         if (!response.status)
             return {
                 statusText: response.statusText,

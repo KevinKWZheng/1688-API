@@ -106,6 +106,4 @@ export async function getToken(appKey: number, redirectUrl: string) {
     if (!authResponse.ok) {
         return { status: false };
     }
-    
-
 }

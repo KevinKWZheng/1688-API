@@ -17,7 +17,7 @@ declare module "1688-api" {
          * @param method 
          * @param containsFile 
          */
-        public sendRequest(url: string, param: RequestParams, method: `POST` | `GET`, containsFile: boolean): Promise<BaseApiResponse>
+        public sendRequest(url: string, param: RequestParams, method: `POST` | `GET`, requiresAuth?: boolean, containsFile?: boolean): Promise<BaseApiResponse>
 
         /**
          * @link https://open.1688.com/api/apidocdetail.htm?id=com.alibaba.linkplus:alibaba.cps.similar.offer.search-1
@@ -97,7 +97,7 @@ declare module "1688-api" {
          * @link https://open.1688.com/api/apidocdetail.htm?id=com.alibaba.fenxiao:alibaba.pifatuan.product.detail.list-1
          * @param params 
          */
-        public getBatchProductDetail(offerIds: number[]): Promise<APIResponse>;
+        public getBatchProductDetail(offerIds: number[], version?: 1 | 2): Promise<APIResponse>;
 
         /**
          * @link https://open.1688.com/api/apidocdetail.htm?id=com.alibaba.fenxiao:alibaba.fenxiao.chosen.offerlist.get-1
