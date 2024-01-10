@@ -206,6 +206,36 @@ declare module "1688-api" {
         public getProductFilter(): Promise<unknown>;
     }
 
+    export class DropshippingSolution extends BaseAPI {
+        constructor(appKey: number, secretKey: string, access_token: string);
+
+        public getProductDetail(offerId: number): Promise<{
+            success: boolean;
+            errorCode: string;
+            errorMsg: string;
+            productInfo: ProductInfo
+        }>;
+
+        public imageSearch(param: {
+            imgBase64?: string;
+            imgUrl?: string;
+            imageKeywords?: string;
+            filter?: string[];
+        }): Promise<{
+            success: boolean;
+            code: string;
+            message: string;
+            imageSearchUrl: string;
+            imageSearchResult: {
+                offerId: number;
+                detailUrl: string;
+                subject: string;
+                image: string;
+                price: string;
+            }[];
+        }>;
+    }
+
     /**
      * Creates signature according to 1688 documentation.
      * 
