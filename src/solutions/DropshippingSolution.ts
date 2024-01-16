@@ -1,4 +1,4 @@
-import { BaseAPI } from "1688-api";
+import { BaseAPI } from "./BaseAPI";
 
 export class DropshippingSolution extends BaseAPI {
     protected readonly getDistributiveProductEndpoint = `param2/1/com.alibaba.fenxiao/alibaba.fenxiao.productInfo.get/`;
@@ -9,7 +9,7 @@ export class DropshippingSolution extends BaseAPI {
     }
 
     public async getProductDetail(offerId: number) {
-        const response = await this.sendRequest(this.getDistributiveProductEndpoint, { offerId: offerId }, `GET`);
+        const response = await this.sendRequest(`http://${this.BaseUrl}/${this.getDistributiveProductEndpoint}`, { offerId: offerId }, `GET`);
         if (!response.status)
             return {
                 statusText: response.statusText,
@@ -29,7 +29,7 @@ export class DropshippingSolution extends BaseAPI {
         imageKeywords?: string;
         filter?: string[];
     }) {
-        const response = await this.sendRequest(this.getDistributiveProductEndpoint, param, `GET`);
+        const response = await this.sendRequest(`http://${this.BaseUrl}/${this.imageSearchEndpoint}`, param, `GET`);
         if (!response.status)
             return {
                 statusText: response.statusText,
