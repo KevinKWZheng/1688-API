@@ -3,6 +3,11 @@ declare module "1688-api" {
     export class BaseAPI {
         constructor(appKey: number, secretKey: string, access_token: string);
 
+        protected readonly appKey: number;
+        protected readonly secretKey: string;
+        protected readonly access_token: string;
+        protected readonly BaseUrl = `gw.open.1688.com/openapi`;
+        
         /**
          * @returns {AppInfo} {appKey:string, secretKey:string}
          */
