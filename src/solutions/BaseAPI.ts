@@ -1,5 +1,6 @@
-import fetch from "node-fetch";
+import axios from "axios";
 import { parseUrl, sign } from "../utilities";
+const fetch = axios.create();
 
 export class BaseAPI {
     protected readonly appKey: number;
@@ -76,9 +77,9 @@ export class BaseAPI {
             }
         });
         return {
-            status: response.ok,
+            status: response.status == 200,
             statusText: `${response.status} ${response.statusText}`,
-            body: (await response.json())
+            body: response.data
         } as BaseApiResponse;
     }
 

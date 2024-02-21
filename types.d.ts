@@ -247,18 +247,6 @@ declare module "1688-api" {
      * http://gw.open.1688.com/dev/tools/request_signature.html?spm=a260s.26059351.0.0.47a055edCGYShm
      */
     export function sign(urlPath: string, params: object, secretKey: string): string;
-
-    /**
-     * A function for accessing any 1688 endpoint, automatically signs and authenticates before sending request. w/ ambient error processing.
-     * @param url 
-     * @param param 
-     * @param appInfo 
-     * @param method 
-     * @param requiresAuth 
-     * @param containsFile 
-     */
-    export function sendRequest(url: string, param: RequestParams, appInfo: AppInfo,
-        method: `POST` | `GET`, requiresAuth: boolean, containsFile: boolean, accessToken?: string): Promise<BaseApiResponse>;
 }
 
 type AppInfo = {

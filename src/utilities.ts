@@ -41,65 +41,6 @@ export function encodeProperties(params: object) {
     return params;
 }
 
-export async function sendRequest(url: string, param: RequestParams, appInfo: AppInfo,
-    method: `POST` | `GET` = `POST`, requiresAuth: boolean = true, containsFile: boolean = false, accessToken?: string) {
-    if (url.indexOf(`openapi`) == url.length - `openapi`.length) throw new Error(`Incorrect URL`);
-    let urlPath = url.substring(url.indexOf(`openapi`) + `openapi`.length + 1);
-
-    if (!urlPath.includes(appInfo.appKey.toString())) {
-        if (urlPath.endsWith(`/`)) {
-            urlPath += appInfo.appKey;
-            url += appInfo.appKey;
-        }
-        else {
-            urlPath += `/${appInfo.appKey}`;
-            url += `/${appInfo.appKey}`;
-        }
-    } else {
-        if (urlPath.endsWith(`/`)) {
-            url = url.substring(0, url.length - 1);
-            urlPath = urlPath.substring(0, url.length - 1);
-        }
-    }
-
-    if (!param.access_token && requiresAuth) param.access_token = accessToken;
-    for (const i in param) {
-        if (i && !param[i]) {
-            delete param[i];
-        }
-        if (typeof (param[i]) === `object`) {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            const obj = param[i] as any;
-            for (const j in obj) {
-                if (!obj[j] && obj[j] != 0 && obj[j] != false && obj[j] != ``)
-                    delete obj[j];
-            }
-        }
-    }
-    if (!param._aop_signature) {
-        const signature = sign(urlPath, param, appInfo.secretKey);
-        param._aop_signature = signature;
-    }
-
-    const URL = parseUrl(url, param);
-    const contentType = (!containsFile) ? `application/x-www-form-urlencoded; charset=UTF-8` : `multipart/form-data`;
-
-    const response = await fetch(URL, {
-        method: method,
-        headers: {
-            'Cache-Control': `no-cache`,
-            'Connection': `Keep-Alive`,
-            'User-Agent': `Ocean-SDK-Client`,
-            'Content-Type': contentType
-        }
-    });
-    return {
-        status: response.ok,
-        statusText: `${response.status} ${response.statusText}`,
-        body: (await response.json())
-    } as BaseApiResponse;
-}
-
 export async function getToken(appKey: number, redirectUrl: string) {
     const authResponse = await fetch(`https://auth.1688.com/oauth/authorize?client_id=${appKey}&site=1688&redirect_uri=${redirectUrl}`,
         { method: `GET`, });
